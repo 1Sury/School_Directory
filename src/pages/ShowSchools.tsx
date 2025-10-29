@@ -45,16 +45,10 @@ const ShowSchools = () => {
     }
   };
 
+  const uniqueCities = Array.from(new Set(schools.map((school) => school.city))).sort();
+
   const filteredSchools = schools.filter((school) => {
-    const query = searchQuery.toLowerCase();
-    return (
-      school.name.toLowerCase().includes(query) ||
-      school.city.toLowerCase().includes(query) ||
-      school.state.toLowerCase().includes(query) ||
-      school.address.toLowerCase().includes(query) ||
-      school.board?.toLowerCase().includes(query) ||
-      school.type?.toLowerCase().includes(query)
-    );
+    return selectedCity === "all" || school.city === selectedCity;
   });
 
   if (loading) {
